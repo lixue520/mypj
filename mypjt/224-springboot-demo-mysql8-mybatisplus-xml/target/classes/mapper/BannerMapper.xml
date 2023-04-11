@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.pdai.springboot.mysql8.mybatisplus.xml.dao.IBannerDao">
+
+<!--    <resultMap type="tech.pdai.springboot.mysql8.mybatisplus.xml.entity.SysBanner" id="RoleResult">-->
+<!--        <id     property="id"       	column="id"      		/>-->
+<!--        <result property="name" 		column="name"  />-->
+<!--        <result property="roleKey" 		column="role_key"  />-->
+<!--        <result property="description" 	column="description"  />-->
+<!--        <result property="createTime"   column="create_time"  	/>-->
+<!--        <result property="updateTime"   column="update_time"  	/>-->
+<!--    </resultMap>-->
+
+<!--    <sql id="selectRoleSql">-->
+<!--        select  r.id, r.name, r.role_key, r.description, r.create_time, r.update_time-->
+<!--        from tb_role r-->
+<!--    </sql>-->
+
+    <select id="findList" resultType="tech.pdai.springboot.mysql8.mybatisplus.xml.entity.SysBanner">
+        select *
+        from sys_banner
+        order by sort ASC;  -- 升序排序
+
+    </select>
+    <select id="save" parameterType="tech.pdai.springboot.mysql8.mybatisplus.xml.entity.SysBanner">
+        insert into sys_banner(type,link,img,remark)
+        values (#{type},#{link},#{img},#{remark})
+    </select>
+
+    <!--通过主键修改数据-->
+    <update id="update" parameterType="tech.pdai.springboot.mysql8.mybatisplus.xml.entity.SysBanner" >
+        update sys_banner
+        <set>
+            sort = #{sort},
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键修改数据-->
+    <update id="updateAll" parameterType="tech.pdai.springboot.mysql8.mybatisplus.xml.entity.SysBanner" >
+        update sys_banner
+        <set>
+            type= #{type},
+            sort = #{sort},
+            img = #{img},
+            link = #{link},
+            remark = #{remark}
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_banner where id = #{id}
+    </delete>
+
+
+</mapper>
